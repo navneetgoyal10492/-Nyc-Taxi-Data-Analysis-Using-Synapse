@@ -1,0 +1,20 @@
+{
+	"name": "2_explore_calendar",
+	"properties": {
+		"folder": {
+			"name": "nyc_taxi/discovery"
+		},
+		"content": {
+			"query": "-- Fetching CSV data using abfs protocol, Header_Row set to True, FIELDTERMINATOR and ROWTERMINATOR specified\nSELECT TOP 100 *\nFROM OPENROWSET(\n    BULK 'calendar.csv',\n    DATA_SOURCE = 'nyc_taxi_data',\n    FORMAT = 'CSV',\n    PARSER_VERSION = '2.0',\n    HEADER_ROW = TRUE\n) WITH (\n    date_key INT,\n    date DATE,\n    year SMALLINT,\n    day TINYINT,\n    day_name VARCHAR(10),\n    day_of_year SMALLINT,\n    week_of_month TINYINT,\n    week_of_year TINYINT,\n    month_name VARCHAR(10),\n    year_month INT,\n    year_week INT\n)AS calendar_results;\n\nUSE nyc_taxi_discovery;\nSELECT name, location from sys.external_data_sources\n\nSELECT \n    MAX(LEN(date_key)),\n    MAX(LEN(date)),\n    MAX(LEN(year)),\n    MAX(LEN(day)),\n    MAX(LEN(day_name)),\n    MAX(LEN(day_of_year)),\n    MAX(LEN(week_of_month)),\n    MAX(LEN(week_of_year)),\n    MAX(LEN(month_name)),\n    MAX(LEN(year_month)),\n    MAX(LEN(year_week))\nFROM OPENROWSET(\n    BULK 'calendar.csv',\n    DATA_SOURCE = 'nyc_taxi_data',\n    FORMAT = 'CSV',\n    PARSER_VERSION = '2.0',\n    HEADER_ROW = TRUE\n) AS calendar_results;\n\n--name, system_type_name, max_length\nEXEC sp_describe_first_result_set N'SELECT \nTOP 100 *\nFROM OPENROWSET(\n    BULK ''calendar.csv'',\n    DATA_SOURCE = ''nyc_taxi_data'',\n    FORMAT = ''CSV'',\n    PARSER_VERSION = ''2.0'',\n    HEADER_ROW = TRUE\n) WITH (\n    date_key INT,\n    date DATE,\n    year SMALLINT,\n    day TINYINT,\n    day_name VARCHAR(10),\n    day_of_year SMALLINT,\n    week_of_month TINYINT,\n    week_of_year TINYINT,\n    month_name VARCHAR(10),\n    year_month INT,\n    year_week INT\n)\nAS calendar_results';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_discovery",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

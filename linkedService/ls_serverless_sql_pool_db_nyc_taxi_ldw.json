@@ -1,0 +1,20 @@
+{
+	"name": "ls_serverless_sql_pool_db_nyc_taxi_ldw",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"server": "tcp:ws-nyc-taxi-data-analysis-ondemand.sql.azuresynapse.net,1433",
+			"database": "nyc_taxi_ldw",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"hostNameInCertificate": "",
+			"authenticationType": "SystemAssignedManagedIdentity"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "8_trip_data_green_parquet",
+	"properties": {
+		"folder": {
+			"name": "nyc_taxi/discovery"
+		},
+		"content": {
+			"query": "USE nyc_taxi_discovery\n\n-- This is auto-generated code\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=2021/month=03/part-00000-tid-7369040652349253775-55a08cd7-e7e7-42bb-b933-15f17a65da9a-152-1-c000.snappy.parquet',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\n-- This is auto-generated code\nSELECT\n    *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=*/month=*/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\nEXEC sp_describe_first_result_set N'SELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK ''trip_data_green_parquet/year=*/month=*/'',\n        DATA_SOURCE = ''nyc_taxi_data'',\n        FORMAT = ''PARQUET''\n    ) AS [result]'\n\n\nSELECT *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=*/month=*/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    )\nWITH (\n    trip_distance FLOAT,\n    fare_amount FLOAT\n) AS [result]\n\n\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=2021/month=03/*.parquet',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\n\nSELECT\n    result.filename() AS file_name,\n    result.*\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=2021/month=03/*.parquet',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\n\nSELECT\n    result.filename() AS file_name,\n    result.*\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=2021/**',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\n\nSELECT\n    result.filepath() AS file_path,\n    result.*\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=2021/**',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\n\nSELECT\n    result.filepath() AS file_path,\n    result.filepath(1) AS year,\n    result.filepath(2) AS month,\n    COUNT(1)\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_parquet/year=*/month=*/*.parquet',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'PARQUET'\n    ) AS [result]\nWHERE result.filepath(1) = 2020 AND\nresult.filepath(2) IN (01,02,03,04)\nGROUP BY result.filepath(),result.filepath(1),result.filepath(2)",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_discovery",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

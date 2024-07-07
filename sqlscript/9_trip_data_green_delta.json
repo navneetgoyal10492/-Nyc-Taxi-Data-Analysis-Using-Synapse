@@ -1,0 +1,20 @@
+{
+	"name": "9_trip_data_green_delta",
+	"properties": {
+		"folder": {
+			"name": "nyc_taxi/discovery"
+		},
+		"content": {
+			"query": "USE nyc_taxi_discovery\n\n-- This is auto-generated code\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'DELTA'\n    ) AS [result]\n\n-- This is auto-generated code\nEXEC sp_describe_first_result_set N'SELECT\n    *\nFROM\n    OPENROWSET(\n        BULK ''trip_data_green_delta/'',\n        DATA_SOURCE = ''nyc_taxi_data'',\n        FORMAT = ''DELTA''\n    ) AS [result]'\n\n\nEXEC sp_describe_first_result_set N'SELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK ''trip_data_green_delta/'',\n        DATA_SOURCE = ''nyc_taxi_data'',\n        FORMAT = ''DELTA''\n    ) AS [result]'\n\n\nSELECT *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'DELTA'\n    )\nWITH (\n    trip_distance FLOAT,\n    fare_amount FLOAT,\n    trip_type SMALLINT,\n    year SMALLINT,\n    month SMALLINT\n) AS [result]\n\n\nSELECT COUNT(trip_type)\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'DELTA'\n    ) AS [result]\n\n\nSELECT COUNT(trip_type)\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'DELTA'\n    ) AS [result]\nWHERE year = 2020 AND month = 10\n\n\nSELECT\n    year,\n    month,\n    COUNT(trip_type)\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data',\n        FORMAT = 'delta'\n    ) AS [result]\n--WHERE year = 2020 AND month IN (01,02,03,04)\nGROUP BY year,month\nORDER BY year,month",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_discovery",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
