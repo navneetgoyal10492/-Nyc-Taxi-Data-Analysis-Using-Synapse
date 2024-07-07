@@ -18,12 +18,16 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "f06b24a8-057f-44b3-b115-f1996c3c6ca7"
+				"spark.autotune.trackingId": "17fabd62-950b-4cbe-b9cc-65bcd2c7c693"
 			}
 		},
 		"metadata": {
 			"saveOutput": false,
 			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
 			"language_info": {
 				"name": "python"
 			},
@@ -34,14 +38,13 @@
 				"endpoint": "https://ws-nyc-taxi-data-analysis.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/coursepool",
 				"auth": {
 					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net",
-					"authHeader": null
+					"authResource": "https://dev.azuresynapse.net"
 				},
 				"sparkVersion": "3.4",
 				"nodeCount": 3,
 				"cores": 4,
 				"memory": 28,
-				"extraHeader": null
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -178,6 +181,9 @@
 					"# Perform the required aggregations\n",
 					"# 1. Total trip count\n",
 					"# 2. Total fare amount\n",
+					"# Perform the required aggregations\n",
+					"# 1. Total trip count\n",
+					"# 2. Total fare amount\n",
 					"from pyspark.sql.functions import *\n",
 					"\n",
 					"trip_data_green_agg_df = trip_data_green_df \\\n",
@@ -222,7 +228,8 @@
 				},
 				"source": [
 					""
-				]
+				],
+				"execution_count": null
 			}
 		]
 	}
