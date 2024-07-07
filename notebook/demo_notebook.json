@@ -18,12 +18,16 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "c3bd0c13-4d5f-4905-9871-da6b5b2f3b20"
+				"spark.autotune.trackingId": "d0f25da4-d9e2-47d9-855f-c470a77dbccb"
 			}
 		},
 		"metadata": {
 			"saveOutput": false,
 			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
 			"language_info": {
 				"name": "python"
 			},
@@ -34,14 +38,13 @@
 				"endpoint": "https://ws-nyc-taxi-data-analysis.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/coursepool",
 				"auth": {
 					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net",
-					"authHeader": null
+					"authResource": "https://dev.azuresynapse.net"
 				},
 				"sparkVersion": "3.4",
 				"nodeCount": 3,
 				"cores": 4,
 				"memory": 28,
-				"extraHeader": null
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 15
 		},
@@ -63,7 +66,7 @@
 				"cell_type": "code",
 				"source": [
 					"year = 2024\n",
-					"print(f'Hello, Welcome to Spark Pool. This is year {year}')"
+					"print(f'Hello, Welcome to Navneet Spark Pool. This is year {year}')"
 				],
 				"execution_count": 1
 			},
@@ -82,7 +85,8 @@
 				},
 				"source": [
 					""
-				]
+				],
+				"execution_count": null
 			}
 		]
 	}
